@@ -1,4 +1,4 @@
 package org.example.backlogmanager.service;
 
-public class Sprint {
+public class ProductOwnerService {
 }
