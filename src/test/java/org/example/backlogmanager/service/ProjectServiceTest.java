@@ -1,8 +1,8 @@
 package org.example.backlogmanager.service;
 
 import org.example.backlogmanager.dto.ProjectCreateDTO;
-import org.example.backlogmanager.model.ProductOwner;
-import org.example.backlogmanager.model.Project;
+import org.example.backlogmanager.entities.ProductOwner;
+import org.example.backlogmanager.entities.Project;
 import org.example.backlogmanager.repository.ProjectRepository;
 import org.example.backlogmanager.repository.UserRepository;
 
@@ -39,7 +39,7 @@ class ProjectServiceTest {
 
         // Define behavior for the Fakes
         when(projectRepository.existsByName("Scrum App")).thenReturn(false);
-        when(userRepository.getById(1L)).thenReturn(Optional.of(mockPO));
+        when(userRepository.findById(1L)).thenReturn(Optional.of(mockPO));
         when(projectRepository.save(any(Project.class))).thenAnswer(i -> i.getArguments()[0]);
 
         // Act (Run the logic)

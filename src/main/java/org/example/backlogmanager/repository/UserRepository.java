@@ -1,6 +1,7 @@
 package org.example.backlogmanager.repository;
 
-import org.example.backlogmanager.model.User;
+import org.example.backlogmanager.entities.User;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface UserRepository extends GenericRepository<User, Long> {
+public interface UserRepository extends JpaRepository<User, Long> {
 }

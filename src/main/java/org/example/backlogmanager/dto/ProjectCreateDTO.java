@@ -2,7 +2,7 @@ package org.example.backlogmanager.dto;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.example.backlogmanager.model.ProductBacklog;
+import org.example.backlogmanager.entities.ProductBacklog;
 
 import java.time.LocalDate;
 
