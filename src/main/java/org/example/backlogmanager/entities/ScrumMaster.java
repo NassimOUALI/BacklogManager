@@ -2,10 +2,10 @@ package org.example.backlogmanager.entities;
 
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import jakarta.persistence.OneToMany;
+import lombok.*;
+
+import java.util.List;
 
 @EqualsAndHashCode(callSuper = true)
 @Entity
@@ -14,4 +14,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ScrumMaster extends User{
+    @OneToMany(mappedBy = "scrumMaster")
+    @ToString.Exclude
+    private List<Project> facilitatedProjects;
 }

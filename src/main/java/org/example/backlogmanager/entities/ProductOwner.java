@@ -1,11 +1,9 @@
 package org.example.backlogmanager.entities;
 
-import jakarta.persistence.DiscriminatorValue;
-import jakarta.persistence.Entity;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import jakarta.persistence.*;
+import lombok.*;
+
+import java.util.List;
 
 @EqualsAndHashCode(callSuper = true)
 @Entity
@@ -15,5 +13,8 @@ import lombok.NoArgsConstructor;
 @Data
 public class ProductOwner extends User{
 
+    @OneToMany(mappedBy = "productOwner", fetch = FetchType.LAZY)
+    @ToString.Exclude
+    private List<Project> ownedProjects;
 
 }
