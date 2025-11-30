@@ -1,15 +1,15 @@
 package org.example.backlogmanager.entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.*;
+
 import jakarta.persistence.*;
-import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
+import java.util.List;
 
 @Entity
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class Project {
@@ -18,27 +18,32 @@ public class Project {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    private String name;
+    private String description;
+    private LocalDate dateDebut;
+
+    @ManyToOne//many "Project" to one "productOwner" joined by the column product_owner_id
+    @JoinColumn(name = "product_owner_id")
     private ProductOwner productOwner;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne//many "Project" to one "scrumMaster" joined by the column scrum_master_id
+    @JoinColumn(name = "scrum_master_id")
     private ScrumMaster scrumMaster;
 
-    @ManyToMany
+    @ManyToMany//many "Project" to many "Developer" joined by a joined table called "project_developers" and by the column "project_id" from the project side and by the column "developer_id" from the developer side (it's gonna be filled by the @Id of each one)
     @JoinTable(
-            name = "project_developer",
+            name = "project_developers",
             joinColumns = @JoinColumn(name = "project_id"),
             inverseJoinColumns = @JoinColumn(name = "developer_id")
     )
-    private ArrayList<Developer> developers;
+    private List<Developer> developers;
 
-    private String nom;
-
-    private String description;
-
-    @OneToOne(cascade = CascadeType.ALL)
+    // Composition: Project "owns" the ProductBacklog
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     private ProductBacklog backlog;
 
-    private LocalDate dateDebut;
+    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL)
+    private List<Sprint> sprints;
+
 
 }

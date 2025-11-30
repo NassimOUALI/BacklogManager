@@ -27,8 +27,6 @@ public class ProjectService {
             throw new IllegalStateException("A project with this name already exists.");
         }
 
-        // 3. Business Logic: Validate Product Owner
-        // In your UML, Project has 1 ProductOwner. We must find them first.
         ProductOwner po = (ProductOwner) userRepository.findById(dto.getProductOwnerId())
                 .orElseThrow(() -> new IllegalArgumentException("Product Owner not found with ID: " + dto.getProductOwnerId()));
 

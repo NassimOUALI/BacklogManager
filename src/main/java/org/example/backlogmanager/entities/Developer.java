@@ -1,13 +1,10 @@
 package org.example.backlogmanager.entities;
 
-
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToMany;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import jakarta.persistence.OneToMany;
+import lombok.*;
 
 import java.util.List;
 
@@ -18,6 +15,13 @@ import java.util.List;
 @NoArgsConstructor
 @Data
 public class Developer extends User{
-    @ManyToMany(mappedBy = "Project")
-    List<Project> projects;
+    // Inverse side of the Many-to-Many defined in Project
+    @ManyToMany(mappedBy = "developers")
+    @ToString.Exclude
+    private List<Project> projects;
+
+    // A developer can have many assigned tasks
+    @OneToMany(mappedBy = "assignedDeveloper")
+    @ToString.Exclude
+    private List<Task> tasks;
 }
