@@ -20,4 +20,7 @@ public class ProductBacklog {
 
     @OneToMany(mappedBy = "productBacklog", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<UserStory> userStories;
+
+    @OneToMany(mappedBy = "productBacklog", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Epic> epics;
 }

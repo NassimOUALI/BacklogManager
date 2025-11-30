@@ -1,8 +1,6 @@
 package org.example.backlogmanager.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.List;
@@ -17,4 +15,8 @@ public class Epic {
 
     @OneToMany(mappedBy = "epic")
     private List<UserStory> userStories;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @ToString.Exclude
+    private ProductBacklog productBacklog;
 }
